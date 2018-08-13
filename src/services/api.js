@@ -1,9 +1,11 @@
-import { schema, arrayOf, normalize } from "normalizr";
-import "isomorphic-fetch";
+import { schema, normalize } from "normalizr";
+import { camelizeKeys } from "humps";
+/* eslint-disable import/no-extraneous-dependencies */
+import fetch from "isomorphic-fetch";
 
 const API_ROOT = "http://pokeapi.co/api/v2/";
 
-function callApi(endpoint, schema) {
+function callApi(endpoint, mySchema) {
   const fullUrl =
     endpoint.indexOf(API_ROOT) === -1 ? API_ROOT + endpoint : endpoint;
 
@@ -16,7 +18,7 @@ function callApi(endpoint, schema) {
 
       const camelizedJson = camelizeKeys(json);
 
-      return Object.assign({}, normalize(camelizedJson, schema), {
+      return Object.assign({}, normalize(camelizedJson, mySchema), {
         response
       });
     })
@@ -26,11 +28,16 @@ function callApi(endpoint, schema) {
     );
 }
 
-const pokemonSchema = new schema.Entity("pokemons", {
+const userSchema = new schema.Entity("users", {
+  name: "name"
+});
+
+const courseSchema = new schema.Entity("courses", {
   url: "url",
   name: "name"
 });
 
-const pokemonSchemaArray = new schema.Array(pokemonSchema);
+const courseSchemaArray = new schema.Array(courseSchema);
 
-export const fetchPokemons = url => callApi(url, pokemonSchemaArray);
+export const fetchUser = url => callApi(url, userSchema);
+export const fetchCourses = url => callApi(url, courseSchemaArray);

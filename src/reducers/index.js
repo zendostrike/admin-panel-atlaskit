@@ -1,8 +1,10 @@
-import * as ActionTypes from "../actions";
 import { combineReducers } from "redux";
+import { merge } from "lodash";
+
+import * as ActionTypes from "../actions";
 
 // Updates an entity cache in response to any action with response.entities.
-function entities(state = { pokemons: {} }, action) {
+function entities(state = { courses: {} }, action) {
   if (action.response && action.response.entities) {
     return merge({}, state, action.response.entities);
   }
@@ -16,7 +18,8 @@ function errorMessage(state = null, action) {
 
   if (type === ActionTypes.RESET_ERROR_MESSAGE) {
     return null;
-  } else if (error) {
+  }
+  if (error) {
     return action.error;
   }
 
@@ -34,7 +37,8 @@ function router(state = { pathname: "/" }, action) {
 
 const rootReducer = combineReducers({
   entities,
-  errorMessage
+  errorMessage,
+  router
 });
 
 export default rootReducer;

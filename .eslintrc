@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "globals": {
+    "window": true,
+    "document": true
+  },
+  "plugins": ["babel"],
+  "rules": {
+    "babel/semi": 1
+  }
+}

@@ -1,13 +1,13 @@
 /* eslint-disable no-constant-condition */
-import { take, put, call, fork, select, all } from "redux-saga/effects";
+import { put, call, select, takeLatest } from "redux-saga/effects";
 import { api } from "../services";
 import * as actions from "../actions";
-import { getPokemons } from "../reducers/selectors";
+import { getCourses } from "../reducers/selectors";
 
 // each entity defines 3 creators { request, success, failure }
-const { pokemons } = actions;
+const { courses } = actions;
 
-/***************************** Subroutines ************************************/
+/* Subroutines */
 
 // resuable fetch Subroutine
 // entity :  pokemons | ...
@@ -22,31 +22,18 @@ function* fetchEntity(entity, apiFn, id, url) {
 }
 
 // yeah! we can also bind Generators
-export const fetchPokemons = fetchEntity.bind(
-  null,
-  pokemons,
-  api.fetchPokemons
-);
+export const fetchCourses = fetchEntity.bind(null, courses, api.fetchCourses);
 
-// load pokemons unless it is cached
-function* loadPokemons({}, requiredFields) {
-  const pokemons = yield select(getPokemons);
-  if (!pokemons) {
-    yield call(apiFetchPokemons);
+// load courses unless it is cached
+function* loadCourses() {
+  const selectedCourses = yield select(getCourses);
+  if (!selectedCourses) {
+    yield call(fetchCourses);
   }
 }
 
-/******************************************************************************/
-/******************************* WATCHERS *************************************/
-/******************************************************************************/
-
-function* watchLoadPokemons() {
-  while (true) {
-    yield take(actions.LOAD_POKEMONS);
-    yield fork(loadPokemons);
-  }
-}
+/* Watchers */
 
 export default function* root() {
-  yield all([fork(watchLoadPokemons)]);
+  yield takeLatest("COURSES_REQUEST", loadCourses);
 }

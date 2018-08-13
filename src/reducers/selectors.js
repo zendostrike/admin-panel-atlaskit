@@ -1,1 +1,2 @@
-export const getPokemons = state => state.entities.pokemons;
+export const getUser = (state, login) => state.entities.users[login];
+export const getCourses = state => state.entities.courses;
