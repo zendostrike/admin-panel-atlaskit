@@ -23,6 +23,15 @@ function errorMessage(state = null, action) {
   return state;
 }
 
+function router(state = { pathname: "/" }, action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_ROUTER_STATE:
+      return action.state;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   entities,
   errorMessage

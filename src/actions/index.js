@@ -14,6 +14,7 @@ function createRequestTypes(base) {
   }, {});
 }
 
+export const LOAD_POKEMONS = "LOAD_POKEMONS";
 export const RESET_ERROR_MESSAGE = "RESET_ERROR_MESSAGE";
 
 function action(type, payload = {}) {
@@ -29,4 +30,6 @@ export const pokemons = {
 export const updateRouterState = state =>
   action(UPDATE_ROUTER_STATE, { state });
 export const navigate = pathname => action(NAVIGATE, { pathname });
+export const loadPokemons = () => action(LOAD_POKEMONS);
+
 export const resetErrorMessage = () => action(RESET_ERROR_MESSAGE);

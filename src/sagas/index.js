@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition */
 import { take, put, call, fork, select, all } from "redux-saga/effects";
-import { api, history } from "../services";
+import { api } from "../services";
 import * as actions from "../actions";
 import { getPokemons } from "../reducers/selectors";
 
@@ -40,21 +40,13 @@ function* loadPokemons({}, requiredFields) {
 /******************************* WATCHERS *************************************/
 /******************************************************************************/
 
-// trigger router navigation via history
-function* watchNavigate() {
-  while (true) {
-    const { pathname } = yield take(actions.NAVIGATE);
-    yield history.push(pathname);
-  }
-}
-
 function* watchLoadPokemons() {
   while (true) {
-    yield take(actions.POKEMONS);
+    yield take(actions.LOAD_POKEMONS);
     yield fork(loadPokemons);
   }
 }
 
 export default function* root() {
-  yield all([fork(watchNavigate), fork(watchLoadPokemons)]);
+  yield all([fork(watchLoadPokemons)]);
 }

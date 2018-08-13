@@ -4,9 +4,10 @@ import styled from "styled-components";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
 import Button from "@atlaskit/button";
 import MenuIcon from "@atlaskit/icon/glyph/menu";
-import Header from "../components/presentational/Header";
-import Table from "../components/presentational/Table";
-import Sidebar from "../components/presentational/Sidebar";
+
+import Header from "../components/Header";
+import Table from "../components/Table";
+import Sidebar from "../components/Sidebar";
 
 const ListTitle = styled.div`
   color: #000;
@@ -49,24 +50,7 @@ class Welcome extends PureComponent {
       <Page>
         <Grid layout="fluid">
           <GridColumn>
-            <Grid>
-              <GridColumn medium={1}>
-                <Button
-                  onClick={() => {
-                    this.openSidebar();
-                  }}
-                  type="button"
-                  css={{
-                    marginTop: "1rem"
-                  }}
-                >
-                  <MenuIcon size="medium" />
-                </Button>
-              </GridColumn>
-              <GridColumn>
-                <h1>Hello mom!</h1>
-              </GridColumn>
-            </Grid>
+            <h1>Hello mom!</h1>
           </GridColumn>
           <GridColumn>
             <h4>Content below which takes up remaining space</h4>
