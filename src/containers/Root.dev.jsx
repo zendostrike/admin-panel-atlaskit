@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { history } from "../services";
 
 import DevTools from "./DevTools";
 import App from "./App";
@@ -9,7 +10,7 @@ import App from "./App";
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
-      <Router>
+      <Router history={history}>
         <App />
       </Router>
       <DevTools />

@@ -14,7 +14,8 @@ export const COURSES = createRequestTypes("COURSES");
 
 export const UPDATE_ROUTER_STATE = "UPDATE_ROUTER_STATE";
 export const NAVIGATE = "NAVIGATE";
-export const LOAD_POKEMONS = "LOAD_POKEMONS";
+export const LOAD_COURSES_PAGE = "LOAD_COURSES_PAGE";
+
 export const RESET_ERROR_MESSAGE = "RESET_ERROR_MESSAGE";
 
 function action(type, payload = {}) {
@@ -30,5 +31,6 @@ export const courses = {
 export const updateRouterState = state =>
   action(UPDATE_ROUTER_STATE, { state });
 export const navigate = pathname => action(NAVIGATE, { pathname });
+export const loadCoursesPage = () => action(LOAD_COURSES_PAGE);
 
 export const resetErrorMessage = () => action(RESET_ERROR_MESSAGE);
