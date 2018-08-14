@@ -10,12 +10,7 @@ const { Sider } = Layout;
 const Sidebar = ({ items, collapsed, defaultSelectedKeys }) => (
   <Sider trigger={null} collapsible width={250} collapsed={collapsed}>
     <div className="logo" />
-    <Menu
-      theme="dark"
-      mode="inline"
-      defaultSelectedKeys={defaultSelectedKeys}
-      // selectedKeys={menuUrl[pathname]}
-    >
+    <Menu theme="dark" mode="inline" defaultSelectedKeys={defaultSelectedKeys}>
       {items.map(item => (
         <MenuItem key={item.key}>
           <Link to={item.path}>
